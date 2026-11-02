@@ -41,13 +41,19 @@ def api(path, params=""):
         with urllib.request.urlopen(request, timeout=60) as response:
             data = json.load(response)
             links = response.headers.get("Link", "")
+        match = re.search(r'<([^>]+)>;\s*rel="next"', links)
+        url = match.group(1) if match else None
         if isinstance(data, list):
             results = (results or []) + data
-            match = re.search(r'<([^>]+)>;\s*rel="next"', links)
-            url = match.group(1) if match else None
+        elif isinstance(data, dict) and isinstance(data.get("commits"), list):
+            # a comparison: its commits are paginated, oldest first
+            if results is None:
+                results = data
+            else:
+                results["commits"] += data["commits"]
         else:
             return data
-    return results or []
+    return results if results is not None else []
 
 
 def try_api(path, params=""):
@@ -138,6 +144,7 @@ def main():
     lines += [""]
 
     # --- forks --------------------------------------------------------------------------
+    fetch_errors = []
     network = discover_network(own)
     old_branches = state.get("branches", {})
     new_branches = {}
@@ -145,6 +152,9 @@ def main():
     for repo in sorted(network):
         branches = try_api(f"/repos/{repo}/branches")
         if not isinstance(branches, list):
+            if repo in old_branches:
+                new_branches[repo] = old_branches[repo]  # check it again next time
+            fetch_errors.append(f"{repo} branches: {branches.get('error') if isinstance(branches, dict) else branches}")
             continue
         heads = {b["name"]: b["commit"]["sha"] for b in branches}
         new_branches[repo] = heads
@@ -165,6 +175,9 @@ def main():
                 commits = commits_between(
                     parent, default_branch(parent), f"{owner_name}:{repo_name}:{branch}"
                 )
+            elif commits is None:
+                # a new or force-pushed branch of the root repository itself
+                commits = commits_between(repo, default_branch(repo), branch)
             label = "new branch" if previous is None else "updated"
             if before is None:
                 label = "new fork"
@@ -191,6 +204,8 @@ def main():
     pr_lines, our_lines, issue_lines, release_lines = [], [], [], []
     for repo in MAIN_REPOS:
         pulls = try_api(f"/repos/{repo}/pulls", "&state=all&sort=updated&direction=desc")
+        if not isinstance(pulls, list):
+            fetch_errors.append(f"{repo} pull requests: {pulls.get('error')}")
         for pr in pulls if isinstance(pulls, list) else []:
             if since and pr["updated_at"] <= since:
                 continue
@@ -220,6 +235,8 @@ def main():
                 pr_lines.append(entry)
         if not first_run:
             issues = try_api(f"/repos/{repo}/issues", f"&state=all&since={since}")
+            if not isinstance(issues, list):
+                fetch_errors.append(f"{repo} issues: {issues.get('error')}")
             for issue in issues if isinstance(issues, list) else []:
                 if "pull_request" in issue or issue["created_at"] <= since:
                     continue
@@ -228,6 +245,8 @@ def main():
                     f" by {issue['user']['login']} ({issue['state']})"
                 )
             releases = try_api(f"/repos/{repo}/releases")
+            if not isinstance(releases, list):
+                fetch_errors.append(f"{repo} releases: {releases.get('error')}")
             for release in releases if isinstance(releases, list) else []:
                 if (release.get("published_at") or "") > since:
                     release_lines.append(
@@ -240,7 +259,13 @@ def main():
     lines += ["## New issues", ""] + (issue_lines or ["None." if not first_run else "(not listed on the first run)"]) + [""]
     lines += ["## New releases", ""] + (release_lines or ["None." if not first_run else "(not listed on the first run)"]) + [""]
 
-    state = {"last_run": now, "branches": new_branches, "network": network}
+    if fetch_errors:
+        # keep the previous checkpoint so the next run covers this period again
+        lines += ["## Requests that failed", ""]
+        lines += [f"- {e}" for e in fetch_errors]
+        lines += ["", "The next run reports this period again.", ""]
+    last_run = since if (fetch_errors and since) else now
+    state = {"last_run": last_run, "branches": new_branches, "network": network}
     with open(os.path.join(out_dir, "state.json"), "w") as f:
         json.dump(state, f, indent=1, sort_keys=True)
     with open(os.path.join(out_dir, "report.md"), "w") as f:
