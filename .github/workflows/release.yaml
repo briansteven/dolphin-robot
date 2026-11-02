@@ -19,6 +19,11 @@ on:
 permissions:
   contents: write
 
+# one run at a time, so a second run sees the first one's release and skips
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
