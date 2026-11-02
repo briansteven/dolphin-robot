@@ -2,7 +2,7 @@ name: Release
 
 # Pushing a version tag (e.g. v1.0.26.1) publishes a GitHub release for it,
 # with that version's CHANGELOG.md section as the notes. HACS installs from
-# these releases.
+# these releases. Beta tags (v1.0.26b3) become prereleases.
 
 # yamllint disable-line rule:truthy
 on:
@@ -29,4 +29,8 @@ jobs:
       - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+        run: |
+          # beta tags such as v1.0.26b3 are published as prereleases
+          extra=""
+          if [[ "$GITHUB_REF_NAME" =~ (a|b|rc)[0-9]+$ ]]; then extra="--prerelease"; fi
+          gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag $extra
