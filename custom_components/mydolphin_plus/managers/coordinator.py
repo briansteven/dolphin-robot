@@ -15,6 +15,7 @@ from homeassistant.components.vacuum import (
     SERVICE_START,
     VacuumActivity,
 )
+from homeassistant.config_entries import SOURCE_REAUTH
 from homeassistant.const import (
     ATTR_ICON,
     ATTR_MODE,
@@ -214,14 +215,24 @@ class MyDolphinPlusCoordinator(DataUpdateCoordinator):
         await self._api.initialize()
 
     def _load_signal_handlers(self):
+        # The status handlers can sleep for minutes (reconnect backoff). Run
+        # them as config entry background tasks, so unloading or reloading
+        # the entry (for example after reauthentication) cancels them instead
+        # of leaving a stale copy that retries with the old login later.
         @callback
         def on_api_status_changed(entry_id: str, status: ConnectivityStatus):
-            self.hass.async_create_task(self._on_api_status_changed(entry_id, status))
+            self.config_entry.async_create_background_task(
+                self.hass,
+                self._on_api_status_changed(entry_id, status),
+                f"{DOMAIN} API status {status}",
+            )
 
         @callback
         def on_aws_client_status_changed(entry_id: str, status: ConnectivityStatus):
-            self.hass.async_create_task(
-                self._on_aws_client_status_changed(entry_id, status)
+            self.config_entry.async_create_background_task(
+                self.hass,
+                self._on_aws_client_status_changed(entry_id, status),
+                f"{DOMAIN} AWS client status {status}",
             )
 
         self.config_entry.async_on_unload(
@@ -277,6 +288,7 @@ class MyDolphinPlusCoordinator(DataUpdateCoordinator):
         if status == ConnectivityStatus.CONNECTED:
             self._reconnection_attempts = 0  # Reset backoff counter on success
             self._reauth_in_progress = False
+            self._abort_reauth_flows()
 
             await self._api.update()
 
@@ -311,6 +323,28 @@ class MyDolphinPlusCoordinator(DataUpdateCoordinator):
             _LOGGER.warning("Started Home Assistant reauthentication flow")
         except Exception as ex:
             _LOGGER.error(f"Failed to start Home Assistant reauthentication flow: {ex}")
+
+    def _abort_reauth_flows(self):
+        """Drop reauthentication prompts that are no longer needed.
+
+        A prompt opened by a failure is left behind when the connection comes
+        back without it (the login is valid after all), and would ask for an
+        emailed code for nothing.
+        """
+        entry = self.config_manager.entry
+        if entry is None:
+            return
+
+        try:
+            flow_manager = self.hass.config_entries.flow
+            for flow in flow_manager.async_progress_by_handler(
+                DOMAIN, match_context={"source": SOURCE_REAUTH}
+            ):
+                if flow.get("context", {}).get("entry_id") == entry.entry_id:
+                    flow_manager.async_abort(flow["flow_id"])
+                    _LOGGER.info("Connected again, closed the reauthentication prompt")
+        except Exception as ex:
+            _LOGGER.debug(f"Could not close reauthentication prompts: {ex}")
 
     async def _on_aws_client_status_changed(
         self, entry_id: str, status: ConnectivityStatus

@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.26.2
+
+- Cancel the reconnect retries of the old integration instance when it is unloaded or reloaded. Before, a retry still waiting after a successful reauthentication fired later with the old (empty) login and opened a new "authentication expired" prompt
+- Close a leftover reauthentication prompt automatically once the connection is back
+
 ## v1.0.26.1
 
 First release of briansteven/dolphin-robot, based on sh00t2kill/dolphin-robot

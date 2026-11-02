@@ -143,3 +143,91 @@ async def test_coordinator_reauth_with_sync_callback():
 
     assert calls["reauth"] == 1
     assert coordinator._reauth_in_progress is True
+
+
+class FakeFlowManager:
+    """Records which config flows were aborted."""
+
+    def __init__(self, flows):
+        self.flows = flows
+        self.aborted = []
+        self.match_context = None
+
+    def async_progress_by_handler(self, _handler, match_context=None):
+        self.match_context = match_context
+        return self.flows
+
+    def async_abort(self, flow_id):
+        self.aborted.append(flow_id)
+
+
+@pytest.mark.asyncio
+async def test_connected_closes_leftover_reauth_prompt():
+    """A reauth prompt left open is closed once the API connects again."""
+    flow_manager = FakeFlowManager(
+        [
+            {"flow_id": "ours", "context": {"source": SOURCE_REAUTH, "entry_id": "entry-id"}},
+            {"flow_id": "other", "context": {"source": SOURCE_REAUTH, "entry_id": "other-entry"}},
+        ]
+    )
+    calls = {"update": 0}
+
+    async def fake_async(*_args, **_kwargs):
+        calls["update"] += 1
+
+    coordinator = MyDolphinPlusCoordinator.__new__(MyDolphinPlusCoordinator)
+    coordinator._reauth_in_progress = True
+    coordinator._reconnection_attempts = 3
+    coordinator.hass = SimpleNamespace(
+        config_entries=SimpleNamespace(flow=flow_manager)
+    )
+    coordinator._config_manager = SimpleNamespace(
+        entry_id="entry-id",
+        entry=SimpleNamespace(entry_id="entry-id"),
+    )
+    coordinator._api = SimpleNamespace(update=fake_async, data={})
+    coordinator._aws_client = SimpleNamespace(
+        update_api_data=fake_async, initialize=fake_async
+    )
+
+    await coordinator._on_api_status_changed("entry-id", ConnectivityStatus.CONNECTED)
+
+    assert flow_manager.aborted == ["ours"]
+    assert flow_manager.match_context == {"source": SOURCE_REAUTH}
+    assert coordinator._reauth_in_progress is False
+    assert coordinator._reconnection_attempts == 0
+
+
+def test_status_handlers_run_as_entry_background_tasks():
+    """Status handlers (which sleep during backoff) are cancelled on unload."""
+    created = []
+    listeners = []
+
+    def fake_background_task(_hass, coro, name):
+        created.append(name)
+        coro.close()
+
+    entry = SimpleNamespace(
+        async_create_background_task=fake_background_task,
+        async_on_unload=lambda unsub: None,
+    )
+
+    coordinator = MyDolphinPlusCoordinator.__new__(MyDolphinPlusCoordinator)
+    coordinator.hass = SimpleNamespace()
+    coordinator.config_entry = entry
+
+    import custom_components.mydolphin_plus.managers.coordinator as coordinator_module
+
+    original = coordinator_module.async_dispatcher_connect
+    coordinator_module.async_dispatcher_connect = (
+        lambda _hass, _signal, target: listeners.append(target) or (lambda: None)
+    )
+    try:
+        coordinator._load_signal_handlers()
+    finally:
+        coordinator_module.async_dispatcher_connect = original
+
+    for listener in listeners:
+        listener("entry-id", ConnectivityStatus.FAILED)
+
+    assert len(created) == 2
