@@ -57,10 +57,18 @@ def api(path, params=""):
 
 
 def try_api(path, params=""):
+    """Like api(), but a 404 (deleted repository or branch) returns an error dict.
+
+    Any other failure (rate limit, server error) stops the run, so the
+    workflow fails without publishing a new checkpoint and the next run
+    covers the same period.
+    """
     try:
         return api(path, params)
     except urllib.error.HTTPError as err:
-        return {"error": f"{err.code} {err.reason}"}
+        if err.code == 404:
+            return {"error": f"{err.code} {err.reason}"}
+        raise
 
 
 def first_line(message):
@@ -78,9 +86,8 @@ def discover_network(own):
     queue = [ROOT]
     while queue:
         repo = queue.pop(0)
-        for fork in try_api(f"/repos/{repo}/forks") or []:
-            if not isinstance(fork, dict):
-                continue
+        forks = try_api(f"/repos/{repo}/forks")
+        for fork in forks if isinstance(forks, list) else []:
             name = fork["full_name"]
             if name in network:
                 continue
@@ -144,7 +151,6 @@ def main():
     lines += [""]
 
     # --- forks --------------------------------------------------------------------------
-    fetch_errors = []
     network = discover_network(own)
     old_branches = state.get("branches", {})
     new_branches = {}
@@ -152,10 +158,7 @@ def main():
     for repo in sorted(network):
         branches = try_api(f"/repos/{repo}/branches")
         if not isinstance(branches, list):
-            if repo in old_branches:
-                new_branches[repo] = old_branches[repo]  # check it again next time
-            fetch_errors.append(f"{repo} branches: {branches.get('error') if isinstance(branches, dict) else branches}")
-            continue
+            continue  # the repository was deleted
         heads = {b["name"]: b["commit"]["sha"] for b in branches}
         new_branches[repo] = heads
         if first_run:
@@ -175,10 +178,12 @@ def main():
                 commits = commits_between(
                     parent, default_branch(parent), f"{owner_name}:{repo_name}:{branch}"
                 )
-            elif commits is None:
+            elif commits is None and branch != default_branch(repo):
                 # a new or force-pushed branch of the root repository itself
                 commits = commits_between(repo, default_branch(repo), branch)
             label = "new branch" if previous is None else "updated"
+            if commits is None and previous:
+                label += ", history rewritten"
             if before is None:
                 label = "new fork"
             if commits == []:
@@ -204,8 +209,6 @@ def main():
     pr_lines, our_lines, issue_lines, release_lines = [], [], [], []
     for repo in MAIN_REPOS:
         pulls = try_api(f"/repos/{repo}/pulls", "&state=all&sort=updated&direction=desc")
-        if not isinstance(pulls, list):
-            fetch_errors.append(f"{repo} pull requests: {pulls.get('error')}")
         for pr in pulls if isinstance(pulls, list) else []:
             if since and pr["updated_at"] <= since:
                 continue
@@ -235,8 +238,6 @@ def main():
                 pr_lines.append(entry)
         if not first_run:
             issues = try_api(f"/repos/{repo}/issues", f"&state=all&since={since}")
-            if not isinstance(issues, list):
-                fetch_errors.append(f"{repo} issues: {issues.get('error')}")
             for issue in issues if isinstance(issues, list) else []:
                 if "pull_request" in issue or issue["created_at"] <= since:
                     continue
@@ -245,8 +246,6 @@ def main():
                     f" by {issue['user']['login']} ({issue['state']})"
                 )
             releases = try_api(f"/repos/{repo}/releases")
-            if not isinstance(releases, list):
-                fetch_errors.append(f"{repo} releases: {releases.get('error')}")
             for release in releases if isinstance(releases, list) else []:
                 if (release.get("published_at") or "") > since:
                     release_lines.append(
@@ -259,13 +258,7 @@ def main():
     lines += ["## New issues", ""] + (issue_lines or ["None." if not first_run else "(not listed on the first run)"]) + [""]
     lines += ["## New releases", ""] + (release_lines or ["None." if not first_run else "(not listed on the first run)"]) + [""]
 
-    if fetch_errors:
-        # keep the previous checkpoint so the next run covers this period again
-        lines += ["## Requests that failed", ""]
-        lines += [f"- {e}" for e in fetch_errors]
-        lines += ["", "The next run reports this period again.", ""]
-    last_run = since if (fetch_errors and since) else now
-    state = {"last_run": last_run, "branches": new_branches, "network": network}
+    state = {"last_run": now, "branches": new_branches, "network": network}
     with open(os.path.join(out_dir, "state.json"), "w") as f:
         json.dump(state, f, indent=1, sort_keys=True)
     with open(os.path.join(out_dir, "report.md"), "w") as f:
