@@ -4,7 +4,23 @@
 
 Integration with MyDolphin Plus to monitor and control your robot
 
-[Changelog](https://github.com/sh00t2kill/dolphin-robot/blob/master/CHANGELOG.md)
+[Changelog](CHANGELOG.md)
+
+## About this version
+
+This is Brian Steven's maintained fork of
+[sh00t2kill/dolphin-robot](https://github.com/sh00t2kill/dolphin-robot). It
+takes changes from upstream and from other forks when they are worth having, and
+adds its own fixes (see [CHANGELOG.md](CHANGELOG.md)):
+
+- **A network blip no longer forces a new email-code login.** A DNS failure,
+  timeout or Cognito server error during the hourly token refresh used to delete
+  the stored login and ask for a new code. The login is now kept and the
+  connection retried with backoff until the network is back.
+
+A weekly GitHub Actions job (`.github/workflows/fork-watch.yaml`) reports what
+changed upstream and in the other forks, and runs the tests against the latest
+Home Assistant; the report is on the `fork-watch` branch.
 
 ## Authentication
 
@@ -28,7 +44,7 @@ The refresh token is reused on every Home Assistant restart and silently renewed
 
 #### Installations via HACS
 
-- In HACS, look for "MyDolphin Plus" and install
+- In HACS, open the menu → Custom repositories, add `https://github.com/briansteven/dolphin-robot` as an Integration, and install "MyDolphin Plus" from it
 - In Configuration --> Integrations - Add MyDolphin Plus
 
 #### Integration settings
