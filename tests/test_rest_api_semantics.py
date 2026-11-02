@@ -302,3 +302,29 @@ async def test_rejected_refresh_token_requires_reauth():
     assert await api._ensure_id_token_valid() is False
     assert cfg.reset_called is True
     assert api.status == ConnectivityStatus.EXPIRED_TOKEN
+
+
+@pytest.mark.asyncio
+async def test_consecutive_transient_failures_keep_dispatching():
+    """Each retry that fails again must notify the coordinator to retry."""
+    cfg = TrackingConfigManager()
+    api = RestAPI(None, cfg)
+    sent = []
+    api.set_local_async_dispatcher_send(lambda *args: sent.append(args[-1]))
+
+    async def fake_init_session():
+        api._session = RaisingSession(None)
+
+    async def fake_integration_init(_hass):
+        return None
+
+    api._initialize_session = fake_init_session
+    info = DummyIntegrationInfo()
+    info.initialize = fake_integration_init
+    api._integration_info = info
+
+    await api.initialize()
+    await api.initialize()
+
+    assert sent.count(ConnectivityStatus.FAILED) == 2
+    assert cfg.refresh_token == "refresh-token"

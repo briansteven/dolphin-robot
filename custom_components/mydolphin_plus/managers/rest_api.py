@@ -276,6 +276,10 @@ class RestAPI:
     async def initialize(self):
         _LOGGER.info("Initializing MyDolphin API")
 
+        # Mark the attempt so a repeated failure (e.g. FAILED -> FAILED) is a
+        # status change again and still reaches the coordinator's retry logic.
+        self._set_status(ConnectivityStatus.CONNECTING, "initializing")
+
         await self._integration_info.initialize(self._hass)
         await self._initialize_session()
         await self._login()
