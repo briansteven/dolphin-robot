@@ -116,3 +116,30 @@ async def test_coordinator_reauth_is_started_once_for_expired_token():
 
     assert calls["reauth"] == 1
     assert calls["failure"] == 2
+
+
+@pytest.mark.asyncio
+async def test_coordinator_reauth_with_sync_callback():
+    """Home Assistant's async_start_reauth is a sync @callback returning None."""
+    calls = {"reauth": 0}
+
+    def sync_start_reauth(_hass):
+        calls["reauth"] += 1
+
+    async def fake_handle_failure():
+        return None
+
+    coordinator = MyDolphinPlusCoordinator.__new__(MyDolphinPlusCoordinator)
+    coordinator._reauth_in_progress = False
+    coordinator.hass = object()
+    coordinator._handle_connection_failure = fake_handle_failure
+    coordinator._config_manager = SimpleNamespace(
+        entry_id="entry-id",
+        entry=SimpleNamespace(async_start_reauth=sync_start_reauth),
+    )
+
+    await coordinator._on_api_status_changed("entry-id", ConnectivityStatus.EXPIRED_TOKEN)
+    await coordinator._on_api_status_changed("entry-id", ConnectivityStatus.EXPIRED_TOKEN)
+
+    assert calls["reauth"] == 1
+    assert coordinator._reauth_in_progress is True

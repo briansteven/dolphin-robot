@@ -249,3 +249,56 @@ async def test_rate_limited_with_expired_cache_sets_failed():
     await api._refresh_aws_credentials()
 
     assert api.status == ConnectivityStatus.FAILED
+
+
+class RaisingSession:
+    """Session whose POST fails like a DNS timeout or a server error."""
+
+    def __init__(self, status: int | None = None):
+        self._status = status
+
+    def post(self, _url, headers=None, data=None):
+        if self._status is None:
+            raise OSError("Timeout while contacting DNS servers")
+        return FakeResponse({"message": "error"}, status=self._status)
+
+
+class TrackingConfigManager(DummyConfigManager):
+    """Records whether login details were wiped."""
+
+    def __init__(self):
+        super().__init__()
+        self.id_token_expires_at = 0  # force a refresh
+        self.reset_called = False
+
+    async def reset_login_details(self):
+        self.reset_called = True
+        self.refresh_token = None
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("status", [None, 429, 500, 503])
+async def test_transient_refresh_failure_keeps_tokens(status):
+    """A network blip or server error must not discard the refresh token."""
+    cfg = TrackingConfigManager()
+    api = RestAPI(None, cfg)
+    api._session = RaisingSession(status)
+    api.set_local_async_dispatcher_send(lambda *_args: None)
+
+    assert await api._ensure_id_token_valid() is False
+    assert cfg.reset_called is False
+    assert cfg.refresh_token == "refresh-token"
+    assert api.status == ConnectivityStatus.FAILED
+
+
+@pytest.mark.asyncio
+async def test_rejected_refresh_token_requires_reauth():
+    """Cognito rejecting the token (4xx) still asks for reauthentication."""
+    cfg = TrackingConfigManager()
+    api = RestAPI(None, cfg)
+    api._session = RaisingSession(400)
+    api.set_local_async_dispatcher_send(lambda *_args: None)
+
+    assert await api._ensure_id_token_valid() is False
+    assert cfg.reset_called is True
+    assert api.status == ConnectivityStatus.EXPIRED_TOKEN
