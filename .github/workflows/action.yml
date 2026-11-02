@@ -15,3 +15,6 @@ jobs:
         uses: "hacs/action@main"
         with:
           category: "integration"
+          # Upstream (sh00t2kill/dolphin-robot) has no license file, so this fork
+          # can't add one; HACS custom repositories install without it.
+          ignore: "license"
