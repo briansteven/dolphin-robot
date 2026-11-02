@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Keep the stored refresh token when Cognito is unreachable (DNS failure, timeout, HTTP 429/5xx) during token refresh, and retry with backoff instead of requiring OTP reauthentication
+- Fix `'NoneType' object can't be awaited` when starting the reauthentication flow (`ConfigEntry.async_start_reauth` is synchronous)
+
 ## v1.0.26
 
 - Use vacuum `activity` instead of `state` for start and pause actions (Home Assistant 2026.x forward compatibility)

@@ -1,5 +1,6 @@
 from asyncio import sleep
 from datetime import datetime, timedelta
+import inspect
 import logging
 import sys
 from typing import Callable
@@ -301,7 +302,11 @@ class MyDolphinPlusCoordinator(DataUpdateCoordinator):
             return
 
         try:
-            await entry.async_start_reauth(self.hass)
+            # ConfigEntry.async_start_reauth is a synchronous @callback in
+            # Home Assistant; awaiting its None return value raised TypeError.
+            result = entry.async_start_reauth(self.hass)
+            if inspect.isawaitable(result):
+                await result
             self._reauth_in_progress = True
             _LOGGER.warning("Started Home Assistant reauthentication flow")
         except Exception as ex:
