@@ -141,6 +141,27 @@
   "jonathanrhysmcdonaldgmailcom/dolphin-robot": {
    "main": "7f67e1e3fd5e97785e68c490acbe0deee29c72df"
   },
+  "matiasmacera/dolphin-robot-home-assistant": {
+   "develop": "8476bb4c43d7c95e061f320b82db78bcd0f42efc",
+   "fix/aws-credentials-log": "c250715e6c9c9f1dbc40b8cd0e516ad883140660",
+   "fix/battery-sensor": "34a4cbe604165d3e9feff25701bc939ccfd81b61",
+   "fix/device-info": "a69f988146e9396f2f6f9533cd8c2ea23bdb22d9",
+   "fix/mqtt-sleep": "cd1366942c1f60f7126c1c4f28d8796734a341a7",
+   "fix/small-entity-fixes": "296df5420d1397b1d22f6ee4fce6b6f1e906cd30",
+   "fix/validation": "254a7df24e91df32800bae9bf9a401be9ec8ea7b",
+   "main": "afd7c8a8b3f80c65416cd0eeffc20d967f24678a",
+   "upstream/clean-modes": "0118d87e8d2cd35be9b99348d4621fbfc7c80c97",
+   "upstream/cycle-time-hours": "753a9cc649d8b50de61862d9a4c5f6be710da248",
+   "upstream/cycle-time-number": "19e5b64bdc0495152a6665b37a7d2a6e762491dd",
+   "upstream/device-info": "782eb2422bfe0c9e7ff34111d7997a0982cef262",
+   "upstream/log-redaction": "0567beee4a8c7c2eb29ab5ef2039ad565bb6ba68",
+   "upstream/mqtt-callback-lag": "b9d826f3dea0137787b0963bc08a74077b496a9b",
+   "upstream/remove-battery-sensor": "18df61b9155528a77d2871607833ecd8e116d27c",
+   "upstream/remove-locate": "e111403b58ecefef4597a4e00e2d79a89c5384e2",
+   "upstream/robot-offline": "782eb2422bfe0c9e7ff34111d7997a0982cef262",
+   "upstream/small-entity-fixes": "de99fc7cc53bd9909cd5c2f4683aee5a279a0bff",
+   "upstream/validation-errors": "8476bb4c43d7c95e061f320b82db78bcd0f42efc"
+  },
   "matponta/dolphin-robot": {
    "1-0-22": "e9bbc167013833a6c52939003b095467ba21710e",
    "add-extra-logging-to-help-debug-connection-issues": "727403b75902ad2b26a2eb1cbec47058bc31429c",
@@ -232,15 +253,16 @@
    "fix/mqtt-sleep": "cd1366942c1f60f7126c1c4f28d8796734a341a7",
    "fix/small-entity-fixes": "296df5420d1397b1d22f6ee4fce6b6f1e906cd30",
    "fix/validation": "254a7df24e91df32800bae9bf9a401be9ec8ea7b",
-   "main": "009bbf4d3fd629b656c9afea183b4dbcd9600925",
+   "main": "afd7c8a8b3f80c65416cd0eeffc20d967f24678a",
    "upstream/clean-modes": "0118d87e8d2cd35be9b99348d4621fbfc7c80c97",
    "upstream/cycle-time-hours": "753a9cc649d8b50de61862d9a4c5f6be710da248",
    "upstream/cycle-time-number": "19e5b64bdc0495152a6665b37a7d2a6e762491dd",
-   "upstream/device-info": "0e7cd558d0e750fdea6c791138ff7a0294a6d0b9",
+   "upstream/device-info": "782eb2422bfe0c9e7ff34111d7997a0982cef262",
    "upstream/log-redaction": "0567beee4a8c7c2eb29ab5ef2039ad565bb6ba68",
    "upstream/mqtt-callback-lag": "b9d826f3dea0137787b0963bc08a74077b496a9b",
    "upstream/remove-battery-sensor": "18df61b9155528a77d2871607833ecd8e116d27c",
    "upstream/remove-locate": "e111403b58ecefef4597a4e00e2d79a89c5384e2",
+   "upstream/robot-offline": "782eb2422bfe0c9e7ff34111d7997a0982cef262",
    "upstream/small-entity-fixes": "de99fc7cc53bd9909cd5c2f4683aee5a279a0bff",
    "upstream/validation-errors": "8476bb4c43d7c95e061f320b82db78bcd0f42efc"
   },
@@ -294,7 +316,7 @@
    "patch-1": "c57d5f3253e299eb0db1c12d99688fa85d87eba4"
   }
  },
- "last_run": "2026-11-02T13:21:25Z",
+ "last_run": "2026-11-09T13:21:44Z",
  "network": {
   "ArTuPSly/dolphin-robot": "sh00t2kill/dolphin-robot",
   "MENUT/dolphin-robot": "sh00t2kill/dolphin-robot",
@@ -310,6 +332,7 @@
   "grillp/dolphin-robot": "sh00t2kill/dolphin-robot",
   "haext/dolphin": "sh00t2kill/dolphin-robot",
   "jonathanrhysmcdonaldgmailcom/dolphin-robot": "sh00t2kill/dolphin-robot",
+  "matiasmacera/dolphin-robot-home-assistant": "sebr/dolphin-robot-home-assistant",
   "matponta/dolphin-robot": "sh00t2kill/dolphin-robot",
   "mrchave3/dolphin-robot": "sh00t2kill/dolphin-robot",
   "odawgs/dolphin-robot": "sh00t2kill/dolphin-robot",
