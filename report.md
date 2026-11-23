@@ -1,18 +1,229 @@
-# Fork watch, 2026-11-16
+# Fork watch, 2026-11-23
 
-Changes since the previous run (2026-11-09T13:21:44Z).
+Changes since the previous run (2026-11-16T13:40:47Z).
 
 ## Tests against the latest Home Assistant
 
-- Home Assistant 2026.11.1: **success**
+- Home Assistant 2026.11.2: **success**
 
 ## Forks with new commits
 
-### [sebr/dolphin-robot-home-assistant](https://github.com/sebr/dolphin-robot-home-assistant) (fork of sh00t2kill/dolphin-robot)
+### [dantendo/dolphin-robot](https://github.com/dantendo/dolphin-robot) (fork of sh00t2kill/dolphin-robot)
 
-- `main` (updated), 2 commit(s) of its own:
-  - 2026-11-11 [`267e5a0`](https://github.com/sebr/dolphin-robot-home-assistant/commit/267e5a0) Keep AWS credentials out of the AWS IoT debug log (#18) (matiasmacera)
-  - 2026-11-11 [`4fe6241`](https://github.com/sebr/dolphin-robot-home-assistant/commit/4fe6241) Bump version to v1.1.1 (#19) (sebr)
+- `1-0-22` (new fork), 4 commit(s) of its own:
+  - 2025-06-26 [`5560af4`](https://github.com/dantendo/dolphin-robot/commit/5560af4) Update changelog for v1.0.22 and increment version in manifest.json (sh00t2kill)
+  - 2025-06-26 [`a057e8e`](https://github.com/dantendo/dolphin-robot/commit/a057e8e) Remove whitespace in README (sh00t2kill)
+  - 2025-06-26 [`c32461e`](https://github.com/dantendo/dolphin-robot/commit/c32461e) Fix typo in README regarding account setup instructions (sh00t2kill)
+  - 2025-06-26 [`e9bbc16`](https://github.com/dantendo/dolphin-robot/commit/e9bbc16) Remove unnecessary whitespace in coordinator.py and update README with account creation note (sh00t2kill)
+- `add-extra-logging-to-help-debug-connection-issues` (new fork), 3 commit(s) of its own:
+  - 2022-10-10 [`ee2fd38`](https://github.com/dantendo/dolphin-robot/commit/ee2fd38) Added extra logging to update function (sh00t2kill)
+  - 2022-10-11 [`3347837`](https://github.com/dantendo/dolphin-robot/commit/3347837) Fixed logging with f string (sh00t2kill)
+  - 2022-10-11 [`727403b`](https://github.com/dantendo/dolphin-robot/commit/727403b) Merge branch 'develop' into add-extra-logging-to-help-debug-connection-issues (sh00t2kill)
+- `add-readme-instructions-for-vacuum-card` (new fork), 2 commit(s) of its own:
+  - 2022-10-20 [`6bb71db`](https://github.com/dantendo/dolphin-robot/commit/6bb71db) Re-added suggested vacuum config (sh00t2kill)
+  - 2022-10-20 [`149f62e`](https://github.com/dantendo/dolphin-robot/commit/149f62e) Fix whitespace (sh00t2kill)
+- `add-reconnect-logic` (new fork), 2 commit(s) of its own:
+  - 2022-10-12 [`73966ab`](https://github.com/dantendo/dolphin-robot/commit/73966ab) Added restart logic to the API (sh00t2kill)
+  - 2022-10-12 [`1570f9f`](https://github.com/dantendo/dolphin-robot/commit/1570f9f) IDE added stupid whitespace (sh00t2kill)
+- `add-turn-on-and-off-services` (new fork), 6 commit(s) of its own:
+  - 2024-06-30 [`d7ed4af`](https://github.com/dantendo/dolphin-robot/commit/d7ed4af) Change base caculated state from off to idle (Dan Wheaton)
+  - 2024-06-30 [`29c8e4a`](https://github.com/dantendo/dolphin-robot/commit/29c8e4a) Added changes to changelog and manifest (Dan Wheaton)
+  - 2024-06-30 [`9ae6fd3`](https://github.com/dantendo/dolphin-robot/commit/9ae6fd3) Fixed failed checks (Dan Wheaton)
+  - 2024-06-30 [`9e2bae9`](https://github.com/dantendo/dolphin-robot/commit/9e2bae9) Changed order of imports (Dan Wheaton)
+  - 2024-06-30 [`44497c8`](https://github.com/dantendo/dolphin-robot/commit/44497c8) Fixed prettier issue (Dan Wheaton)
+  - 2024-06-30 [`648707d`](https://github.com/dantendo/dolphin-robot/commit/648707d) Updated to idle state (Dan Wheaton)
+- `add-unit-of-measurement-to-cycle-time-left-sensor` (new fork), 1 commit(s) of its own:
+  - 2023-04-27 [`e52844c`](https://github.com/dantendo/dolphin-robot/commit/e52844c) Add unit of measurement h to surpress HA warning (sh00t2kill)
+- `add-validate-workflow-for-hacs` (new fork), 1 commit(s) of its own:
+  - 2022-09-27 [`97e99ad`](https://github.com/dantendo/dolphin-robot/commit/97e99ad) Adding hacs validation workflow (sh00t2kill)
+- `develop` (new fork), 30 commit(s) of its own:
+  - 2026-05-09 [`4e27402`](https://github.com/dantendo/dolphin-robot/commit/4e27402) Merge pull request #271 from sh00t2kill/prepare-for-v1_0_25-release (elad-bar)
+  - 2026-05-09 [`3e9acd1`](https://github.com/dantendo/dolphin-robot/commit/3e9acd1) Merge branch 'develop' into cognito-otp-login (elad-bar)
+  - 2026-05-09 [`59f24e0`](https://github.com/dantendo/dolphin-robot/commit/59f24e0) Merge pull request #270 from yumlevi/cognito-otp-login (elad-bar)
+  - 2026-05-09 [`bdbf918`](https://github.com/dantendo/dolphin-robot/commit/bdbf918) Update CHANGELOG for v1.0.26b1 and bump version in manifest.json to reflect new Cognito OTP login flow integration. (elad-bar)
+  - 2026-05-09 [`8678cd7`](https://github.com/dantendo/dolphin-robot/commit/8678cd7) Update pre-commit configuration to use Black version 26.3.1 and improve code formatting across multiple files. Adjust RE (elad-bar)
+  - 2026-05-09 [`0ae4528`](https://github.com/dantendo/dolphin-robot/commit/0ae4528) Add last AWS credentials fetch tracking and integrate user-agent headers (elad-bar)
+  - 2026-05-09 [`810b475`](https://github.com/dantendo/dolphin-robot/commit/810b475) Implement reauthentication flow for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`46f7f0e`](https://github.com/dantendo/dolphin-robot/commit/46f7f0e) Add reauthentication prompts for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`25e8dc1`](https://github.com/dantendo/dolphin-robot/commit/25e8dc1) update changelog (elad-bar)
+  - 2026-05-09 [`8048d5b`](https://github.com/dantendo/dolphin-robot/commit/8048d5b) Merge pull request #273 from sh00t2kill/post-otp-merge-fixes (elad-bar)
+  - 2026-05-09 [`df5fbf9`](https://github.com/dantendo/dolphin-robot/commit/df5fbf9) Add CONTRIBUTING.md file and update README to include contribution guidelines (elad-bar)
+  - 2026-05-09 [`bf84ae6`](https://github.com/dantendo/dolphin-robot/commit/bf84ae6) Merge pull request #274 from sh00t2kill/contribution-list (elad-bar)
+  - 2026-05-09 [`9919f2c`](https://github.com/dantendo/dolphin-robot/commit/9919f2c) Enhance AWS credential management (elad-bar)
+  - 2026-05-09 [`bc0a631`](https://github.com/dantendo/dolphin-robot/commit/bc0a631) Merge pull request #275 from sh00t2kill/fix-otp-token-post-restart (elad-bar)
+  - 2026-05-09 [`a8f22a6`](https://github.com/dantendo/dolphin-robot/commit/a8f22a6) Update changelog and fix vacuum pause behavior (elad-bar)
+  - 2026-05-09 [`d948065`](https://github.com/dantendo/dolphin-robot/commit/d948065) Merge pull request #276 from sh00t2kill/fix-stop-robot (elad-bar)
+  - 2026-05-09 [`973ab60`](https://github.com/dantendo/dolphin-robot/commit/973ab60) Update changelog and refactor MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`2e62a9e`](https://github.com/dantendo/dolphin-robot/commit/2e62a9e) Create fr.json (ArTuPSly)
+  - 2026-05-09 [`cb0d4d8`](https://github.com/dantendo/dolphin-robot/commit/cb0d4d8) Update fr.json (ArTuPSly)
+  - 2026-05-09 [`c5b78b8`](https://github.com/dantendo/dolphin-robot/commit/c5b78b8) Merge pull request #277 from ArTuPSly/traduction_fr (elad-bar)
+  - 2026-05-09 [`ffd5b0c`](https://github.com/dantendo/dolphin-robot/commit/ffd5b0c) Merge pull request #278 from sh00t2kill/ha-future-changes-alignment (elad-bar)
+  - 2026-05-09 [`cc8a1e6`](https://github.com/dantendo/dolphin-robot/commit/cc8a1e6) Add French translation support for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`bddd13b`](https://github.com/dantendo/dolphin-robot/commit/bddd13b) Fix AWS credential refresh logic to handle missing last fetch timestamp and update CHANGELOG.md accordingly. (elad-bar)
+  - 2026-05-09 [`962602f`](https://github.com/dantendo/dolphin-robot/commit/962602f) Merge pull request #279 from sh00t2kill/prepare-for-next-beta-version (elad-bar)
+  - 2026-05-14 [`66a18b3`](https://github.com/dantendo/dolphin-robot/commit/66a18b3) Remove outdated WORKFLOWS.md and add comprehensive documentation for Maytronics integration, covering setup, startup, on (eladb_playtika)
+  - 2026-05-14 [`eab194c`](https://github.com/dantendo/dolphin-robot/commit/eab194c) Refactor Maytronics documentation for improved clarity and consistency (elad-bar)
+  - 2026-06-04 [`d4b41d3`](https://github.com/dantendo/dolphin-robot/commit/d4b41d3) Update MyDolphin Plus integration to version v1.0.26 (eladb_playtika)
+  - 2026-06-04 [`3f04d6d`](https://github.com/dantendo/dolphin-robot/commit/3f04d6d) Enhance MyDolphin Plus integration with new features and improvements (eladb_playtika)
+  - 2026-06-04 [`01f3897`](https://github.com/dantendo/dolphin-robot/commit/01f3897) Refactor MyDolphin Plus integration for improved task scheduling and remove legacy code (eladb_playtika)
+  - 2026-06-04 [`a59ca0e`](https://github.com/dantendo/dolphin-robot/commit/a59ca0e) Merge pull request #287 from sh00t2kill/prepare-release-26 (elad-bar)
+- `develop-lordlala` (new fork), 2 commit(s) of its own:
+  - 2022-09-22 [`12e7a87`](https://github.com/dantendo/dolphin-robot/commit/12e7a87) Update hacs.json (lordlala)
+  - 2022-09-23 [`0de44ee`](https://github.com/dantendo/dolphin-robot/commit/0de44ee) Creation of service (lordlala)
+- `fix-excessive-token-api-calls-during-reconnections` (new fork), 4 commit(s) of its own:
+  - 2025-12-30 [`f864765`](https://github.com/dantendo/dolphin-robot/commit/f864765) add throttling (eladb_playtika)
+  - 2025-12-30 [`93f287e`](https://github.com/dantendo/dolphin-robot/commit/93f287e) removed 10 attmpts to build the right key, using instead urlsafe_b64encode (elad-bar)
+  - 2025-12-30 [`c7993d9`](https://github.com/dantendo/dolphin-robot/commit/c7993d9) update the header to be version based (elad-bar)
+  - 2025-12-30 [`cc3dd73`](https://github.com/dantendo/dolphin-robot/commit/cc3dd73) fix precommit errors (elad-bar)
+- `fix-filter-state` (new fork), 6 commit(s) of its own:
+  - 2022-09-27 [`324c0b4`](https://github.com/dantendo/dolphin-robot/commit/324c0b4) Added binary sensor device_weekly_schedule_enabled (sh00t2kill)
+  - 2022-09-27 [`061ccc8`](https://github.com/dantendo/dolphin-robot/commit/061ccc8) Fixed issues with whitespace (sh00t2kill)
+  - 2022-09-27 [`20db99b`](https://github.com/dantendo/dolphin-robot/commit/20db99b) Fixed issues with whitespace (sh00t2kill)
+  - 2022-09-27 [`64e9e98`](https://github.com/dantendo/dolphin-robot/commit/64e9e98) Fixed status using state correctly (sh00t2kill)
+  - 2022-09-27 [`0737c74`](https://github.com/dantendo/dolphin-robot/commit/0737c74) Fixed connection state (sh00t2kill)
+  - 2022-09-27 [`9ed3d82`](https://github.com/dantendo/dolphin-robot/commit/9ed3d82) Fixed filter status state (sh00t2kill)
+- `fix-issue-178` (new fork), 2 commit(s) of its own:
+  - 2024-03-22 [`20f88ab`](https://github.com/dantendo/dolphin-robot/commit/20f88ab) Applying change tested by jasoncodes (sh00t2kill)
+  - 2024-03-22 [`957a002`](https://github.com/dantendo/dolphin-robot/commit/957a002) Removed new lines at the end of README (Dan Wheaton)
+- `fix-time-remaining` (new fork), 3 commit(s) of its own:
+  - 2022-09-27 [`94e60da`](https://github.com/dantendo/dolphin-robot/commit/94e60da) Timestamps are wack! (sh00t2kill)
+  - 2022-09-27 [`8ecfd3e`](https://github.com/dantendo/dolphin-robot/commit/8ecfd3e) Added logic to test the time. There seems to be a maytonics issue with the time being returned (sh00t2kill)
+  - 2022-09-27 [`098bc22`](https://github.com/dantendo/dolphin-robot/commit/098bc22) Fixed whitespace (sh00t2kill)
+- `fix-vacuum-start` (new fork), 2 commit(s) of its own:
+  - 2022-10-06 [`118f9c4`](https://github.com/dantendo/dolphin-robot/commit/118f9c4) Fixed vacuum start (sh00t2kill)
+  - 2022-10-06 [`e1bad62`](https://github.com/dantendo/dolphin-robot/commit/e1bad62) Added custom card configuration to readme (sh00t2kill)
+- `lordlala` (new fork), 5 commit(s) of its own:
+  - 2022-09-07 [`82de8cf`](https://github.com/dantendo/dolphin-robot/commit/82de8cf) Test file, messages example, robot.py (lordlala)
+  - 2022-09-07 [`232bed6`](https://github.com/dantendo/dolphin-robot/commit/232bed6) Merge branch 'develop' into lordlala (sh00t2kill)
+  - 2022-09-23 [`1c8bcaf`](https://github.com/dantendo/dolphin-robot/commit/1c8bcaf) Latest testing (lordlala)
+  - 2022-09-23 [`4b9ea36`](https://github.com/dantendo/dolphin-robot/commit/4b9ea36) Update #Test.py (lordlala)
+  - 2022-09-23 [`0b63f72`](https://github.com/dantendo/dolphin-robot/commit/0b63f72) Added listen function (#6) (sh00t2kill)
+- `maytronics-one-support` (new fork), 30 commit(s) of its own:
+  - 2026-01-05 [`3677261`](https://github.com/dantendo/dolphin-robot/commit/3677261) Update CHANGELOG for v1.0.25b5, fixing AWS token generation payload handling, refactoring AWSClient for real-time MQTT u (elad-bar)
+  - 2026-01-05 [`3066ed5`](https://github.com/dantendo/dolphin-robot/commit/3066ed5) lint errors (elad-bar)
+  - 2026-05-09 [`69f73fe`](https://github.com/dantendo/dolphin-robot/commit/69f73fe) Replace login with Cognito OTP flow (devilismyfriend)
+  - 2026-05-09 [`6e32caf`](https://github.com/dantendo/dolphin-robot/commit/6e32caf) Update CHANGELOG for v1.0.25, addressing AWS token generation errors, enhancing validation for motor unit serials and AW (elad-bar)
+  - 2026-05-09 [`4e27402`](https://github.com/dantendo/dolphin-robot/commit/4e27402) Merge pull request #271 from sh00t2kill/prepare-for-v1_0_25-release (elad-bar)
+  - 2026-05-09 [`3e9acd1`](https://github.com/dantendo/dolphin-robot/commit/3e9acd1) Merge branch 'develop' into cognito-otp-login (elad-bar)
+  - 2026-05-09 [`59f24e0`](https://github.com/dantendo/dolphin-robot/commit/59f24e0) Merge pull request #270 from yumlevi/cognito-otp-login (elad-bar)
+  - 2026-05-09 [`bdbf918`](https://github.com/dantendo/dolphin-robot/commit/bdbf918) Update CHANGELOG for v1.0.26b1 and bump version in manifest.json to reflect new Cognito OTP login flow integration. (elad-bar)
+  - 2026-05-09 [`8678cd7`](https://github.com/dantendo/dolphin-robot/commit/8678cd7) Update pre-commit configuration to use Black version 26.3.1 and improve code formatting across multiple files. Adjust RE (elad-bar)
+  - 2026-05-09 [`0ae4528`](https://github.com/dantendo/dolphin-robot/commit/0ae4528) Add last AWS credentials fetch tracking and integrate user-agent headers (elad-bar)
+  - 2026-05-09 [`810b475`](https://github.com/dantendo/dolphin-robot/commit/810b475) Implement reauthentication flow for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`46f7f0e`](https://github.com/dantendo/dolphin-robot/commit/46f7f0e) Add reauthentication prompts for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`25e8dc1`](https://github.com/dantendo/dolphin-robot/commit/25e8dc1) update changelog (elad-bar)
+  - 2026-05-09 [`8048d5b`](https://github.com/dantendo/dolphin-robot/commit/8048d5b) Merge pull request #273 from sh00t2kill/post-otp-merge-fixes (elad-bar)
+  - 2026-05-09 [`df5fbf9`](https://github.com/dantendo/dolphin-robot/commit/df5fbf9) Add CONTRIBUTING.md file and update README to include contribution guidelines (elad-bar)
+  - 2026-05-09 [`bf84ae6`](https://github.com/dantendo/dolphin-robot/commit/bf84ae6) Merge pull request #274 from sh00t2kill/contribution-list (elad-bar)
+  - 2026-05-09 [`9919f2c`](https://github.com/dantendo/dolphin-robot/commit/9919f2c) Enhance AWS credential management (elad-bar)
+  - 2026-05-09 [`bc0a631`](https://github.com/dantendo/dolphin-robot/commit/bc0a631) Merge pull request #275 from sh00t2kill/fix-otp-token-post-restart (elad-bar)
+  - 2026-05-09 [`a8f22a6`](https://github.com/dantendo/dolphin-robot/commit/a8f22a6) Update changelog and fix vacuum pause behavior (elad-bar)
+  - 2026-05-09 [`d948065`](https://github.com/dantendo/dolphin-robot/commit/d948065) Merge pull request #276 from sh00t2kill/fix-stop-robot (elad-bar)
+  - 2026-05-09 [`973ab60`](https://github.com/dantendo/dolphin-robot/commit/973ab60) Update changelog and refactor MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`2e62a9e`](https://github.com/dantendo/dolphin-robot/commit/2e62a9e) Create fr.json (ArTuPSly)
+  - 2026-05-09 [`cb0d4d8`](https://github.com/dantendo/dolphin-robot/commit/cb0d4d8) Update fr.json (ArTuPSly)
+  - 2026-05-09 [`c5b78b8`](https://github.com/dantendo/dolphin-robot/commit/c5b78b8) Merge pull request #277 from ArTuPSly/traduction_fr (elad-bar)
+  - 2026-05-09 [`ffd5b0c`](https://github.com/dantendo/dolphin-robot/commit/ffd5b0c) Merge pull request #278 from sh00t2kill/ha-future-changes-alignment (elad-bar)
+  - 2026-05-09 [`cc8a1e6`](https://github.com/dantendo/dolphin-robot/commit/cc8a1e6) Add French translation support for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`bddd13b`](https://github.com/dantendo/dolphin-robot/commit/bddd13b) Fix AWS credential refresh logic to handle missing last fetch timestamp and update CHANGELOG.md accordingly. (elad-bar)
+  - 2026-05-09 [`962602f`](https://github.com/dantendo/dolphin-robot/commit/962602f) Merge pull request #279 from sh00t2kill/prepare-for-next-beta-version (elad-bar)
+  - 2026-05-10 [`0ede50c`](https://github.com/dantendo/dolphin-robot/commit/0ede50c) Update MyDolphin Plus integration to support Maytronics One app (elad-bar)
+  - 2026-05-14 [`d2958f2`](https://github.com/dantendo/dolphin-robot/commit/d2958f2) Add Maytronics Robot rebrand plan document (elad-bar)
+- `patch-1` (new fork), 1 commit(s) of its own:
+  - 2026-11-17 [`7818b9d`](https://github.com/dantendo/dolphin-robot/commit/7818b9d) Update coordinator.py (dantendo)
+- `post-otp-merge-fixes` (new fork), 30 commit(s) of its own:
+  - 2025-12-30 [`c7993d9`](https://github.com/dantendo/dolphin-robot/commit/c7993d9) update the header to be version based (elad-bar)
+  - 2025-12-30 [`cc3dd73`](https://github.com/dantendo/dolphin-robot/commit/cc3dd73) fix precommit errors (elad-bar)
+  - 2025-12-30 [`b4bd0fc`](https://github.com/dantendo/dolphin-robot/commit/b4bd0fc) Merge pull request #258 from sh00t2kill/fix-excessive-token-api-calls-during-reconnections (elad-bar)
+  - 2025-12-30 [`36ff9b0`](https://github.com/dantendo/dolphin-robot/commit/36ff9b0) update precommit depdencies (elad-bar)
+  - 2025-12-30 [`aaa94f9`](https://github.com/dantendo/dolphin-robot/commit/aaa94f9) another update for bandit (elad-bar)
+  - 2025-12-31 [`b988492`](https://github.com/dantendo/dolphin-robot/commit/b988492) Fix AWS token generation errors (eladb_playtika)
+  - 2026-01-01 [`88438de`](https://github.com/dantendo/dolphin-robot/commit/88438de) Update changelog for version 1.0.25b2 and improve token fetching logic in ConfigManager (eladb_playtika)
+  - 2026-01-01 [`99d69fb`](https://github.com/dantendo/dolphin-robot/commit/99d69fb) Add validation to prevent API calls with invalid or missing AWS tokens (eladb_playtika)
+  - 2026-01-01 [`b2c95d0`](https://github.com/dantendo/dolphin-robot/commit/b2c95d0) prevent clearing the motor serial number when reset_login_details (elad-bar)
+  - 2026-01-02 [`5002730`](https://github.com/dantendo/dolphin-robot/commit/5002730) update versionand doc (elad-bar)
+  - 2026-01-05 [`a04fcb7`](https://github.com/dantendo/dolphin-robot/commit/a04fcb7) add workflows and entities doc (eladb_playtika)
+  - 2026-01-05 [`27efbd9`](https://github.com/dantendo/dolphin-robot/commit/27efbd9) Add MQTT update debouncing documentation to optimize UI updates and reduce CPU usage (eladb_playtika)
+  - 2026-01-05 [`b42787c`](https://github.com/dantendo/dolphin-robot/commit/b42787c) Update MQTT debouncing documentation to clarify optimization benefits (eladb_playtika)
+  - 2026-01-05 [`be4ff5a`](https://github.com/dantendo/dolphin-robot/commit/be4ff5a) Enhance connectivity status handling and improve API response validation. Added is_disconnected method to ConnectivitySt (eladb_playtika)
+  - 2026-01-05 [`93b0b7f`](https://github.com/dantendo/dolphin-robot/commit/93b0b7f) Merge branch 'develop' of https://github.com/sh00t2kill/dolphin-robot into develop (eladb_playtika)
+  - 2026-01-05 [`9a69f05`](https://github.com/dantendo/dolphin-robot/commit/9a69f05) Add credential validation in ConfigManager to clear expired cached credentials before API calls. This ensures fresh auth (eladb_playtika)
+  - 2026-01-05 [`ca09ac2`](https://github.com/dantendo/dolphin-robot/commit/ca09ac2) Refactor AWSClient to include a callback for real-time MQTT data updates and adjust update intervals. Implement debounci (eladb_playtika)
+  - 2026-01-05 [`3677261`](https://github.com/dantendo/dolphin-robot/commit/3677261) Update CHANGELOG for v1.0.25b5, fixing AWS token generation payload handling, refactoring AWSClient for real-time MQTT u (elad-bar)
+  - 2026-01-05 [`3066ed5`](https://github.com/dantendo/dolphin-robot/commit/3066ed5) lint errors (elad-bar)
+  - 2026-05-09 [`69f73fe`](https://github.com/dantendo/dolphin-robot/commit/69f73fe) Replace login with Cognito OTP flow (devilismyfriend)
+  - 2026-05-09 [`6e32caf`](https://github.com/dantendo/dolphin-robot/commit/6e32caf) Update CHANGELOG for v1.0.25, addressing AWS token generation errors, enhancing validation for motor unit serials and AW (elad-bar)
+  - 2026-05-09 [`4e27402`](https://github.com/dantendo/dolphin-robot/commit/4e27402) Merge pull request #271 from sh00t2kill/prepare-for-v1_0_25-release (elad-bar)
+  - 2026-05-09 [`3e9acd1`](https://github.com/dantendo/dolphin-robot/commit/3e9acd1) Merge branch 'develop' into cognito-otp-login (elad-bar)
+  - 2026-05-09 [`59f24e0`](https://github.com/dantendo/dolphin-robot/commit/59f24e0) Merge pull request #270 from yumlevi/cognito-otp-login (elad-bar)
+  - 2026-05-09 [`bdbf918`](https://github.com/dantendo/dolphin-robot/commit/bdbf918) Update CHANGELOG for v1.0.26b1 and bump version in manifest.json to reflect new Cognito OTP login flow integration. (elad-bar)
+  - 2026-05-09 [`8678cd7`](https://github.com/dantendo/dolphin-robot/commit/8678cd7) Update pre-commit configuration to use Black version 26.3.1 and improve code formatting across multiple files. Adjust RE (elad-bar)
+  - 2026-05-09 [`0ae4528`](https://github.com/dantendo/dolphin-robot/commit/0ae4528) Add last AWS credentials fetch tracking and integrate user-agent headers (elad-bar)
+  - 2026-05-09 [`810b475`](https://github.com/dantendo/dolphin-robot/commit/810b475) Implement reauthentication flow for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`46f7f0e`](https://github.com/dantendo/dolphin-robot/commit/46f7f0e) Add reauthentication prompts for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`25e8dc1`](https://github.com/dantendo/dolphin-robot/commit/25e8dc1) update changelog (elad-bar)
+- `pr-269` (new fork), 2 commit(s) of its own:
+  - 2026-05-09 [`eda3ead`](https://github.com/dantendo/dolphin-robot/commit/eda3ead) Replace login with Cognito OTP flow (devilismyfriend)
+  - 2026-05-09 [`4901146`](https://github.com/dantendo/dolphin-robot/commit/4901146) Update README for Cognito OTP login (devilismyfriend)
+- `prepare-for-v1_0_25-release` (new fork), 22 commit(s) of its own:
+  - 2025-12-30 [`f864765`](https://github.com/dantendo/dolphin-robot/commit/f864765) add throttling (eladb_playtika)
+  - 2025-12-30 [`93f287e`](https://github.com/dantendo/dolphin-robot/commit/93f287e) removed 10 attmpts to build the right key, using instead urlsafe_b64encode (elad-bar)
+  - 2025-12-30 [`c7993d9`](https://github.com/dantendo/dolphin-robot/commit/c7993d9) update the header to be version based (elad-bar)
+  - 2025-12-30 [`cc3dd73`](https://github.com/dantendo/dolphin-robot/commit/cc3dd73) fix precommit errors (elad-bar)
+  - 2025-12-30 [`b4bd0fc`](https://github.com/dantendo/dolphin-robot/commit/b4bd0fc) Merge pull request #258 from sh00t2kill/fix-excessive-token-api-calls-during-reconnections (elad-bar)
+  - 2025-12-30 [`36ff9b0`](https://github.com/dantendo/dolphin-robot/commit/36ff9b0) update precommit depdencies (elad-bar)
+  - 2025-12-30 [`aaa94f9`](https://github.com/dantendo/dolphin-robot/commit/aaa94f9) another update for bandit (elad-bar)
+  - 2025-12-31 [`b988492`](https://github.com/dantendo/dolphin-robot/commit/b988492) Fix AWS token generation errors (eladb_playtika)
+  - 2026-01-01 [`88438de`](https://github.com/dantendo/dolphin-robot/commit/88438de) Update changelog for version 1.0.25b2 and improve token fetching logic in ConfigManager (eladb_playtika)
+  - 2026-01-01 [`99d69fb`](https://github.com/dantendo/dolphin-robot/commit/99d69fb) Add validation to prevent API calls with invalid or missing AWS tokens (eladb_playtika)
+  - 2026-01-01 [`b2c95d0`](https://github.com/dantendo/dolphin-robot/commit/b2c95d0) prevent clearing the motor serial number when reset_login_details (elad-bar)
+  - 2026-01-02 [`5002730`](https://github.com/dantendo/dolphin-robot/commit/5002730) update versionand doc (elad-bar)
+  - 2026-01-05 [`a04fcb7`](https://github.com/dantendo/dolphin-robot/commit/a04fcb7) add workflows and entities doc (eladb_playtika)
+  - 2026-01-05 [`27efbd9`](https://github.com/dantendo/dolphin-robot/commit/27efbd9) Add MQTT update debouncing documentation to optimize UI updates and reduce CPU usage (eladb_playtika)
+  - 2026-01-05 [`b42787c`](https://github.com/dantendo/dolphin-robot/commit/b42787c) Update MQTT debouncing documentation to clarify optimization benefits (eladb_playtika)
+  - 2026-01-05 [`be4ff5a`](https://github.com/dantendo/dolphin-robot/commit/be4ff5a) Enhance connectivity status handling and improve API response validation. Added is_disconnected method to ConnectivitySt (eladb_playtika)
+  - 2026-01-05 [`93b0b7f`](https://github.com/dantendo/dolphin-robot/commit/93b0b7f) Merge branch 'develop' of https://github.com/sh00t2kill/dolphin-robot into develop (eladb_playtika)
+  - 2026-01-05 [`9a69f05`](https://github.com/dantendo/dolphin-robot/commit/9a69f05) Add credential validation in ConfigManager to clear expired cached credentials before API calls. This ensures fresh auth (eladb_playtika)
+  - 2026-01-05 [`ca09ac2`](https://github.com/dantendo/dolphin-robot/commit/ca09ac2) Refactor AWSClient to include a callback for real-time MQTT data updates and adjust update intervals. Implement debounci (eladb_playtika)
+  - 2026-01-05 [`3677261`](https://github.com/dantendo/dolphin-robot/commit/3677261) Update CHANGELOG for v1.0.25b5, fixing AWS token generation payload handling, refactoring AWSClient for real-time MQTT u (elad-bar)
+  - 2026-01-05 [`3066ed5`](https://github.com/dantendo/dolphin-robot/commit/3066ed5) lint errors (elad-bar)
+  - 2026-05-09 [`6e32caf`](https://github.com/dantendo/dolphin-robot/commit/6e32caf) Update CHANGELOG for v1.0.25, addressing AWS token generation errors, enhancing validation for motor unit serials and AW (elad-bar)
+- `prepare-release-26` (new fork), 30 commit(s) of its own:
+  - 2026-05-09 [`6e32caf`](https://github.com/dantendo/dolphin-robot/commit/6e32caf) Update CHANGELOG for v1.0.25, addressing AWS token generation errors, enhancing validation for motor unit serials and AW (elad-bar)
+  - 2026-05-09 [`4e27402`](https://github.com/dantendo/dolphin-robot/commit/4e27402) Merge pull request #271 from sh00t2kill/prepare-for-v1_0_25-release (elad-bar)
+  - 2026-05-09 [`3e9acd1`](https://github.com/dantendo/dolphin-robot/commit/3e9acd1) Merge branch 'develop' into cognito-otp-login (elad-bar)
+  - 2026-05-09 [`59f24e0`](https://github.com/dantendo/dolphin-robot/commit/59f24e0) Merge pull request #270 from yumlevi/cognito-otp-login (elad-bar)
+  - 2026-05-09 [`bdbf918`](https://github.com/dantendo/dolphin-robot/commit/bdbf918) Update CHANGELOG for v1.0.26b1 and bump version in manifest.json to reflect new Cognito OTP login flow integration. (elad-bar)
+  - 2026-05-09 [`8678cd7`](https://github.com/dantendo/dolphin-robot/commit/8678cd7) Update pre-commit configuration to use Black version 26.3.1 and improve code formatting across multiple files. Adjust RE (elad-bar)
+  - 2026-05-09 [`0ae4528`](https://github.com/dantendo/dolphin-robot/commit/0ae4528) Add last AWS credentials fetch tracking and integrate user-agent headers (elad-bar)
+  - 2026-05-09 [`810b475`](https://github.com/dantendo/dolphin-robot/commit/810b475) Implement reauthentication flow for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`46f7f0e`](https://github.com/dantendo/dolphin-robot/commit/46f7f0e) Add reauthentication prompts for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`25e8dc1`](https://github.com/dantendo/dolphin-robot/commit/25e8dc1) update changelog (elad-bar)
+  - 2026-05-09 [`8048d5b`](https://github.com/dantendo/dolphin-robot/commit/8048d5b) Merge pull request #273 from sh00t2kill/post-otp-merge-fixes (elad-bar)
+  - 2026-05-09 [`df5fbf9`](https://github.com/dantendo/dolphin-robot/commit/df5fbf9) Add CONTRIBUTING.md file and update README to include contribution guidelines (elad-bar)
+  - 2026-05-09 [`bf84ae6`](https://github.com/dantendo/dolphin-robot/commit/bf84ae6) Merge pull request #274 from sh00t2kill/contribution-list (elad-bar)
+  - 2026-05-09 [`9919f2c`](https://github.com/dantendo/dolphin-robot/commit/9919f2c) Enhance AWS credential management (elad-bar)
+  - 2026-05-09 [`bc0a631`](https://github.com/dantendo/dolphin-robot/commit/bc0a631) Merge pull request #275 from sh00t2kill/fix-otp-token-post-restart (elad-bar)
+  - 2026-05-09 [`a8f22a6`](https://github.com/dantendo/dolphin-robot/commit/a8f22a6) Update changelog and fix vacuum pause behavior (elad-bar)
+  - 2026-05-09 [`d948065`](https://github.com/dantendo/dolphin-robot/commit/d948065) Merge pull request #276 from sh00t2kill/fix-stop-robot (elad-bar)
+  - 2026-05-09 [`973ab60`](https://github.com/dantendo/dolphin-robot/commit/973ab60) Update changelog and refactor MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`2e62a9e`](https://github.com/dantendo/dolphin-robot/commit/2e62a9e) Create fr.json (ArTuPSly)
+  - 2026-05-09 [`cb0d4d8`](https://github.com/dantendo/dolphin-robot/commit/cb0d4d8) Update fr.json (ArTuPSly)
+  - 2026-05-09 [`c5b78b8`](https://github.com/dantendo/dolphin-robot/commit/c5b78b8) Merge pull request #277 from ArTuPSly/traduction_fr (elad-bar)
+  - 2026-05-09 [`ffd5b0c`](https://github.com/dantendo/dolphin-robot/commit/ffd5b0c) Merge pull request #278 from sh00t2kill/ha-future-changes-alignment (elad-bar)
+  - 2026-05-09 [`cc8a1e6`](https://github.com/dantendo/dolphin-robot/commit/cc8a1e6) Add French translation support for MyDolphin Plus integration (elad-bar)
+  - 2026-05-09 [`bddd13b`](https://github.com/dantendo/dolphin-robot/commit/bddd13b) Fix AWS credential refresh logic to handle missing last fetch timestamp and update CHANGELOG.md accordingly. (elad-bar)
+  - 2026-05-09 [`962602f`](https://github.com/dantendo/dolphin-robot/commit/962602f) Merge pull request #279 from sh00t2kill/prepare-for-next-beta-version (elad-bar)
+  - 2026-05-14 [`66a18b3`](https://github.com/dantendo/dolphin-robot/commit/66a18b3) Remove outdated WORKFLOWS.md and add comprehensive documentation for Maytronics integration, covering setup, startup, on (eladb_playtika)
+  - 2026-05-14 [`eab194c`](https://github.com/dantendo/dolphin-robot/commit/eab194c) Refactor Maytronics documentation for improved clarity and consistency (elad-bar)
+  - 2026-06-04 [`d4b41d3`](https://github.com/dantendo/dolphin-robot/commit/d4b41d3) Update MyDolphin Plus integration to version v1.0.26 (eladb_playtika)
+  - 2026-06-04 [`3f04d6d`](https://github.com/dantendo/dolphin-robot/commit/3f04d6d) Enhance MyDolphin Plus integration with new features and improvements (eladb_playtika)
+  - 2026-06-04 [`01f3897`](https://github.com/dantendo/dolphin-robot/commit/01f3897) Refactor MyDolphin Plus integration for improved task scheduling and remove legacy code (eladb_playtika)
+- `vacuum-controls-not-working` (new fork), 4 commit(s) of its own:
+  - 2022-10-06 [`488f421`](https://github.com/dantendo/dolphin-robot/commit/488f421) Changed status check for vacuum.start to accept both ON and OFF (sh00t2kill)
+  - 2022-10-06 [`3959d69`](https://github.com/dantendo/dolphin-robot/commit/3959d69) Changed status check for vacuum.start to accept both ON and OFF (sh00t2kill)
+  - 2022-10-06 [`dfcfa4c`](https://github.com/dantendo/dolphin-robot/commit/dfcfa4c) Fixed whitepsace (sh00t2kill)
+  - 2022-10-06 [`5c509fb`](https://github.com/dantendo/dolphin-robot/commit/5c509fb) Restored vacuum.locate (sh00t2kill)
 
 ## Our pull requests upstream
 
@@ -20,11 +231,11 @@ No activity.
 
 ## Other pull requests (new or updated)
 
-None.
+- [sh00t2kill/dolphin-robot#317](https://github.com/sh00t2kill/dolphin-robot/pull/317) Fix: Allow vacuum.pause to stop active cleaning cycle (Issue #285) - Update coordinator.py by dantendo (open, updated 2026-11-17)
 
 ## New issues
 
-- [sh00t2kill/dolphin-robot#316](https://github.com/sh00t2kill/dolphin-robot/issues/316) Reauthentication timeout - no resend of verification code by Johnny-Nova (open)
+None.
 
 ## New releases
 
